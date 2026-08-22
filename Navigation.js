@@ -1,10 +1,10 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Home from "./Home.js";
-import Travel from "./Travel.js";
-import TripCircle from "./TripCircle.js";
-import Rewards from "./Rewards.js";
+import Home from "./screens/Home.js";
+import Travel from "./screens/Travel.js";
+import TripCircle from "./screens/TripCircle.js";
+import Rewards from "./screens/Rewards.js";
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
     return (
