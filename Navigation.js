@@ -18,9 +18,12 @@ const Navigation = () => {
                 screenOptions={{headerShown: false}}
             >
                 <Tab.Screen name="Home" component={Home} />
-                <Tab.Screen name="Travel" component={Travel} />
-                <Tab.Screen name="TripCircle" component={TripCircle} />
+                {/*<Tab.Screen name="Travel" component={Travel} />*/}
+                {/*<Tab.Screen name="TripCircle" component={TripCircle} />*/}
+                <Tab.Screen name="Pay" />
+                <Tab.Screen name="Scan" />
                 <Tab.Screen name="Rewards" component={Rewards} />
+                <Tab.Screen name="Profile" />
             </Tab.Navigator>
         </NavigationContainer>
     )
