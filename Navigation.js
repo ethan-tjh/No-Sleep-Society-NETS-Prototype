@@ -1,20 +1,27 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+import Navbar from './components/Navbar';
 import Home from "./screens/Home.js";
 import Travel from "./screens/Travel.js";
 import TripCircle from "./screens/TripCircle.js";
 import Rewards from "./screens/Rewards.js";
-const Stack = createNativeStackNavigator();
+
+const Tab = createBottomTabNavigator();
+
 const Navigation = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{headerShown: false}}>
-                <Stack.Screen name="Home" component={Home}/>
-                <Stack.Screen name="Travel" component{Travel}/>
-                <Stack.Screen name="TripCircle" component{TripCircle}/>
-                <Stack.Screen name="Rewards" component={Rewards}/>
-            </Stack.Navigator>
+            <Tab.Navigator
+                tabBar={(props) => <Navbar {...props} />}
+                screenOptions={{headerShown: false}}
+            >
+                <Tab.Screen name="Home" component={Home} />
+                <Tab.Screen name="Travel" component={Travel} />
+                <Tab.Screen name="TripCircle" component={TripCircle} />
+                <Tab.Screen name="Rewards" component={Rewards} />
+            </Tab.Navigator>
         </NavigationContainer>
     )
 }

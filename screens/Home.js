@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {StatusBar, Text, View, Image, ScrollView} from 'react-native';
-import styles from '../Styles';
+import homeStyle from '../styles/HomeStyle';
 const Home = ({navigation}) => {
     return (
         <ScrollView>
             <View>
-                <Text style={styles.header}>Smart Wallet</Text>
+                <Text style={homeStyle.header}>Smart Wallet</Text>
             </View>
             <View>
 
