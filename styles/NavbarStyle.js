@@ -18,8 +18,13 @@ const NavbarStyle = StyleSheet.create({
         gap: spacing.xs,
     },
     iconWrapper: {
-        padding: spacing.sm,
-        borderRadius: 999,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: spacing.xs,
+        paddingVertical: spacing.xs,
+        paddingHorizontal: spacing.sm,
+        borderRadius: 16,
     },
     iconWrapperActive: {
       backgroundColor: colors.primary,
