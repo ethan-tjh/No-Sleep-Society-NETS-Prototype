@@ -24,7 +24,7 @@ const NavbarStyle = StyleSheet.create({
         gap: spacing.xs,
         paddingVertical: spacing.xs,
         paddingHorizontal: spacing.sm,
-        borderRadius: 16,
+        borderRadius: 999,
     },
     iconWrapperActive: {
       backgroundColor: colors.primary,
