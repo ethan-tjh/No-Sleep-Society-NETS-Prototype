@@ -8,6 +8,6 @@ export default function Icon({name, size = 24, color = colors.inactive, focused}
     if (!LucideIcon) return null;
 
     return (
-        <LucideIcon size={size} color={focused ? colors.primary: color} />
+        <LucideIcon size={size} color={focused ? '#fff' : color} />
     );
 }

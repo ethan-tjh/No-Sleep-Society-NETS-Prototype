@@ -38,10 +38,12 @@ export default function Navbar({state, descriptors, navigation}) {
                         style={NavbarStyle.tabItem}
                         activeOpacity={0.7}
                     >
-                        <Icon name={icons[route.name]} focused={isFocused} style={NavbarStyle.icon}/>
-                        <Text style={[NavbarStyle.label, isFocused && NavbarStyle.labelFocused]}>
-                            {label}
-                        </Text>
+                        <View style={[NavbarStyle.iconWrapper, isFocused && NavbarStyle.iconWrapperActive]}>
+                            <Icon name={icons[route.name]} focused={isFocused} color={isFocused ? '#fff' : undefined} />
+                            <Text style={[NavbarStyle.label, isFocused && NavbarStyle.labelFocused]}>
+                                {label}
+                            </Text>
+                        </View>
                     </TouchableOpacity>
                 )
             })}

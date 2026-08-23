@@ -17,12 +17,19 @@ const NavbarStyle = StyleSheet.create({
         alignItems: 'center',
         gap: spacing.xs,
     },
+    iconWrapper: {
+        padding: spacing.sm,
+        borderRadius: 999,
+    },
+    iconWrapperActive: {
+      backgroundColor: colors.primary,
+    },
     label: {
         fontSize: fontSizes.small,
         color: colors.text,
     },
     labelFocused: {
-        color: '#000',
+        color: '#fff',
         fontWeight: '600',
     },
 });
