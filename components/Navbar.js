@@ -3,6 +3,14 @@ import {View, TouchableOpacity, Text} from 'react-native';
 import NavbarStyle from "../styles/NavbarStyle";
 import Icon from "../components/Icons";
 
+const icons = {
+    Home: 'House',
+    Pay: 'ScanLine',
+    Scan: 'QrCode',
+    Rewards: 'Gift',
+    Profile: 'UserRound',
+};
+
 export default function Navbar({state, descriptors, navigation}) {
     return (
         <View style={NavbarStyle.container}>
@@ -30,7 +38,7 @@ export default function Navbar({state, descriptors, navigation}) {
                         style={NavbarStyle.tabItem}
                         activeOpacity={0.7}
                     >
-                        {/*<Icon name={} />*/}
+                        <Icon name={icons[route.name]} focused={isFocused} />
                         <Text style={[NavbarStyle.label, isFocused && NavbarStyle.labelFocused]}>
                             {label}
                         </Text>
