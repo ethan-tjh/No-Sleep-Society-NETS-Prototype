@@ -22,9 +22,10 @@ const NavbarStyle = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         gap: spacing.xs,
-        paddingVertical: spacing.xs,
+        paddingVertical: spacing.sm,
         paddingHorizontal: spacing.sm,
         borderRadius: 999,
+        overflow: 'hidden',
     },
     iconWrapperActive: {
       backgroundColor: colors.primary,
