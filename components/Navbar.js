@@ -38,7 +38,7 @@ export default function Navbar({state, descriptors, navigation}) {
                         style={NavbarStyle.tabItem}
                         activeOpacity={0.7}
                     >
-                        <Icon name={icons[route.name]} focused={isFocused} />
+                        <Icon name={icons[route.name]} focused={isFocused} style={NavbarStyle.icon}/>
                         <Text style={[NavbarStyle.label, isFocused && NavbarStyle.labelFocused]}>
                             {label}
                         </Text>
