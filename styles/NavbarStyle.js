@@ -1,12 +1,13 @@
 import {StyleSheet} from 'react-native';
+import {colors, fontSizes, spacing, fonts} from './theme';
 
 const NavbarStyle = StyleSheet.create({
     container: {
         flexDirection: 'row',
         height: 60,
-        backgroundColor: '#fff',
+        backgroundColor: colors.background,
         borderTopWidth: 1,
-        borderTopColor: '#eee',
+        borderTopColor: colors.border,
     },
     tabItem: {
         flex: 1,
@@ -14,8 +15,8 @@ const NavbarStyle = StyleSheet.create({
         alignItems: 'center',
     },
     label: {
-        fontSize: 12,
-        color: '000000E2',
+        fontSize: fontSizes.small,
+        color: colors.text,
     },
     labelFocused: {
         color: '#000',

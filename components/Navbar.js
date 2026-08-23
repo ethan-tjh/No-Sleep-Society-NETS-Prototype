@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import NavbarStyle from "../styles/NavbarStyle";
+import Icon from "../components/Icons";
 
 export default function Navbar({state, descriptors, navigation}) {
     return (
@@ -29,6 +30,7 @@ export default function Navbar({state, descriptors, navigation}) {
                         style={NavbarStyle.tabItem}
                         activeOpacity={0.7}
                     >
+                        {/*<Icon name={} />*/}
                         <Text style={[NavbarStyle.label, isFocused && NavbarStyle.labelFocused]}>
                             {label}
                         </Text>

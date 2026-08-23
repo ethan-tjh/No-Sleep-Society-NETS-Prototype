@@ -6,7 +6,10 @@ import Navbar from './components/Navbar';
 import Home from "./screens/Home.js";
 import Travel from "./screens/Travel.js";
 import TripCircle from "./screens/TripCircle.js";
+import Pay from "./screens/Pay.js";
+import Scan from "./screens/Scan.js";
 import Rewards from "./screens/Rewards.js";
+import Profile from "./screens/Profile.js";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,10 +23,10 @@ const Navigation = () => {
                 <Tab.Screen name="Home" component={Home} />
                 {/*<Tab.Screen name="Travel" component={Travel} />*/}
                 {/*<Tab.Screen name="TripCircle" component={TripCircle} />*/}
-                <Tab.Screen name="Pay" />
-                <Tab.Screen name="Scan" />
+                <Tab.Screen name="Pay" component={Pay}/>
+                <Tab.Screen name="Scan" component={Scan}/>
                 <Tab.Screen name="Rewards" component={Rewards} />
-                <Tab.Screen name="Profile" />
+                <Tab.Screen name="Profile" component={Profile}/>
             </Tab.Navigator>
         </NavigationContainer>
     )
