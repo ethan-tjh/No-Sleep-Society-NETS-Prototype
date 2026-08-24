@@ -38,5 +38,9 @@ const NavbarStyle = StyleSheet.create({
         color: '#fff',
         fontWeight: '600',
     },
+    labelFocusedPlain: {
+        color: colors.primary,
+        fontWeight: '600',
+    },
 });
 export default NavbarStyle;

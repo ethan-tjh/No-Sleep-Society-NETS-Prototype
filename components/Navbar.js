@@ -2,6 +2,7 @@ import React from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import NavbarStyle from "../styles/NavbarStyle";
 import Icon from "../components/Icons";
+import {colors} from "../styles/theme";
 
 const icons = {
     Home: 'House',
@@ -18,6 +19,7 @@ export default function Navbar({state, descriptors, navigation}) {
                 const {options} = descriptors[route.key];
                 const label = options.tabBarLabel ?? options.title ?? route.name;
                 const isFocused = state.index === index;
+                const isScanTab = route.name === 'Scan';
 
                 const onPress = () => {
                     const event = navigation.emit({
@@ -31,6 +33,10 @@ export default function Navbar({state, descriptors, navigation}) {
                     }
                 };
 
+                const iconColor = isScanTab
+                    ? '#fff'
+                    : (isFocused ? colors.primary: colors.inactive);
+
                 return (
                     <TouchableOpacity
                         key={route.key}
@@ -38,9 +44,15 @@ export default function Navbar({state, descriptors, navigation}) {
                         style={NavbarStyle.tabItem}
                         activeOpacity={0.7}
                     >
-                        <View style={[NavbarStyle.iconWrapper, isFocused && NavbarStyle.iconWrapperActive]}>
-                            <Icon name={icons[route.name]} focused={isFocused} color={isFocused ? '#fff' : undefined} />
-                            <Text style={[NavbarStyle.label, isFocused && NavbarStyle.labelFocused]}>
+                        <View style={[
+                            NavbarStyle.iconWrapper,
+                            isScanTab && NavbarStyle.iconWrapperActive,
+                        ]}>
+                            <Icon name={icons[route.name]} color={iconColor}/>
+                            <Text style={[
+                                NavbarStyle.label,
+                                isFocused && NavbarStyle.labelFocusedPlain,
+                            ]}>
                                 {label}
                             </Text>
                         </View>
