@@ -51,7 +51,7 @@ export default function Navbar({state, descriptors, navigation}) {
                             <Icon name={icons[route.name]} color={iconColor}/>
                             <Text style={[
                                 NavbarStyle.label,
-                                isFocused && NavbarStyle.labelFocusedPlain,
+                                isScanTab ? {color: '#fff', fontWeight: '600'} : (isFocused && NavbarStyle.labelFocusedPlain),
                             ]}>
                                 {label}
                             </Text>

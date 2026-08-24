@@ -1,4 +1,6 @@
 import React from 'react';
+import {StatusBar} from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Navigation from "./Navigation.js";
 import {
   useFonts,
@@ -18,7 +20,10 @@ const App = () => {
   if (!fontsLoaded) return null;
 
   return (
-      <Navigation />
+      <SafeAreaProvider>
+        <StatusBar translucent={true} backgroundColor="transparent"/>
+        <Navigation />
+      </SafeAreaProvider>
   )
 };
 export default App;

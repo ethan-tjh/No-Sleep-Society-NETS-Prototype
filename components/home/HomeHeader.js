@@ -6,8 +6,16 @@ import {colors, fonts, fontSizes, spacing} from '../../styles/theme';
 export default function HomeHeader({name}) {
     return (
         <View style={{paddingHorizontal: spacing.md, paddingTop: spacing.lg}}>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                <Text style={{fontFamily: fonts.bold, fontSize: fontSizes.header}}>Smart Wallet</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{width: 22}}/>
+                <Text style={{
+                    flex: 1,
+                    textAlign: 'center',
+                    fontFamily: fonts.bold,
+                    fontSize: fontSizes.header
+                }}>
+                    Smart Wallet
+                </Text>
                 <TouchableOpacity>
                     <Bell size={22} color={colors.text} />
                 </TouchableOpacity>
