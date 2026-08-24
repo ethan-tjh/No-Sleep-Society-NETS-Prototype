@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {StatusBar, Text, ScrollView, Image, View, TouchableOpacity} from 'react-native';
-import ScreenWrapper from  '../components/screenWrapper';
+import ScreenWrapper from  '../components/ScreenWrapper';
 import {colors, fonts, fontSizes, spacing} from "../styles/theme";
 import {Bell} from "lucide-react-native";
 
