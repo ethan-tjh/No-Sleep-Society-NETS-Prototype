@@ -1,10 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {StatusBar, Text, View, Image} from 'react-native';
+import {StatusBar, ScrollView, Text, View, Image} from 'react-native';
+import ScreenWrapper from '../components/ScreenWrapper';
+
 const Travel = ({navigation}) => {
     return (
-        <View>
-            <Text>Travel Mode</Text>
-        </View>
+        <ScreenWrapper>
+            <ScrollView>
+                <Text>Travel Mode</Text>
+            </ScrollView>
+        </ScreenWrapper>
     );
 };
 export default Travel;
