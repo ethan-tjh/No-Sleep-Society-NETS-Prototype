@@ -12,7 +12,7 @@ export default function SavingsGoal({title, saved, target, deadline}) {
     const progressOffset = circumference - (percent / 100) * circumference;
 
     return (
-        <View style={{margin: spacing.md, padding: spacing.md, borderRadius: 16, backgroundColor: '#fff', borderWidth: 1, borderColor: '#F0F0F0'}}>
+        <View style={{marginHorizontal: spacing.md, marginTop: spacing.md, padding: spacing.md, borderRadius: 16, backgroundColor: '#fff', borderWidth: 1, borderColor: '#F0F0F0'}}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: spacing.sm}}>
                 <Text style={{fontFamily: fonts.semibold, fontSize: fontSizes.body}}>Savings Goal</Text>
                 <Text style={{fontSize: fontSizes.small, color: '#3B82F6'}}>Edit Goal</Text>

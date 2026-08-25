@@ -5,7 +5,7 @@ import {fonts, fontSizes, spacing} from '../../styles/theme';
 
 export default function ReminderBanner({message}) {
     return (
-      <View style={{flexDirection: 'row', alignItems: 'center', margin: spacing.md, padding: spacing.md, borderRadius: 16, backgroundColor: '#EAF7EF'}}>
+      <View style={{flexDirection: 'row', alignItems: 'center', marginHorizontal: spacing.md, marginTop: spacing.md, padding: spacing.md, borderRadius: 16, backgroundColor: '#EAF7EF'}}>
           <Lightbulb size={20} color="#22A559"/>
           <Text style={{flex: 1, marginLeft: spacing.sm, fontSize: fontSizes.small, fontFamily: fonts.regular}}>
               {message}
