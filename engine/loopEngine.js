@@ -8,6 +8,7 @@
 // Expected payment shape:
 // {
 //   paymentId: string,
+//   userToken: string,
 //   merchantId: string,
 //   merchantName: string,
 //   merchantType: string,

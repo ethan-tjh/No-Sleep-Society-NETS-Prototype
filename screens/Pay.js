@@ -4,6 +4,7 @@ import ScreenWrapper from '../components/ScreenWrapper';
 import {colors, fonts, fontSizes, spacing} from '../styles/theme';
 import {Bell} from 'lucide-react-native';
 import {merchants} from '../data/mockMerchants';
+import {currentUserToken} from '../data/mockUser';
 import {useWallet} from '../context/WalletContext';
 
 const Pay = ({navigation}) => {
@@ -14,6 +15,7 @@ const Pay = ({navigation}) => {
         const merchant = merchants.find((m) => m.id === selectedMerchantId);
         const payment = {
             paymentId: `txn_${Date.now()}`,
+            userToken: currentUserToken,
             merchantId: merchant.id,
             merchantName: merchant.name,
             merchantType: merchant.type,

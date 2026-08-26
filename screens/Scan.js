@@ -4,6 +4,7 @@ import ScreenWrapper from '../components/ScreenWrapper';
 import {colors, fonts, fontSizes, spacing} from '../styles/theme';
 import {QrCode} from 'lucide-react-native';
 import {merchants} from '../data/mockMerchants';
+import {currentUserToken} from '../data/mockUser';
 import {useWallet} from '../context/WalletContext';
 
 const Scan = ({navigation}) => {
@@ -12,6 +13,7 @@ const Scan = ({navigation}) => {
     const handleScan = (merchant) => {
         const payment = {
             paymentId: `txn_${Date.now()}`,
+            userToken: currentUserToken,
             merchantId: merchant.id,
             merchantName: merchant.name,
             merchantType: merchant.type,
