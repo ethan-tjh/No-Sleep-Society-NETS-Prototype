@@ -26,7 +26,7 @@ export default function BudgetCard({remaining, total, period}) {
                 <Wallet size={36} color="#4CAF6D" />
             </View>
 
-            <View style={{height: 8, backgroundColor: '#D5EFDD', borderRadius: 4, marginTop: spacing.sm, overflow: 'hidden'}}>
+            <View style={{height: 8, backgroundColor: '#d5efdd', borderRadius: 4, marginTop: spacing.sm, overflow: 'hidden'}}>
                 <View style={{width: `${percent}%`, height: '100%', backgroundColor: '#4CAF6D', borderRadius: 4}} />
             </View>
             <Text style={{alignSelf: 'flex-end', fontSize: fontSizes.small, color: '#4CAF6D', marginTop: 4}}>{percent}%</Text>

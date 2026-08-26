@@ -31,11 +31,11 @@ const Receipt = ({route, navigation}) => {
     return (
         <ScreenWrapper>
             <ScrollView contentContainerStyle={{padding: spacing.md, paddingTop: spacing.lg}}>
-                <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: spacing.lg}}>
-                    <CheckCircle2 size={20} color={colors.primary}/>
+                <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: spacing.lg, backgroundColor: '#d5efdd', padding: spacing.md, borderRadius: 12}}>
+                    <CheckCircle2 size={20} color="#2e7d32"/>
                     <View style={{marginLeft: spacing.sm}}>
                         <Text style={{fontFamily: fonts.medium, fontSize: fontSizes.body}}>
-                            Payment successful
+                            Payment Successful
                         </Text>
                         <Text style={{fontFamily: fonts.regular, fontSize: fontSizes.small, color: colors.inactive}}>
                             ${payment?.amount?.toFixed(2)} — {payment?.merchantName}
@@ -44,10 +44,15 @@ const Receipt = ({route, navigation}) => {
                 </View>
 
                 <View style={{alignItems: 'center', marginBottom: spacing.lg}}>
-                    <PetVisual species={petSpecies} level={petLevelInfo.level}/>
-                    <Text style={{fontFamily: fonts.bold, fontSize: fontSizes.header, marginTop: spacing.sm}}>
-                        {petName ? `${petName} is level ${petLevelInfo.level}` : `Level ${petLevelInfo.level}`}
-                    </Text>
+                    <PetVisual species={petSpecies} level={petLevelInfo.level} size={140}/>
+                    <View style={{flexDirection: 'row', alignItems: 'center', marginTop: spacing.sm}}>
+                        <Text style={{fontFamily: fonts.bold, fontSize: fontSizes.header}}>
+                            {petName ? `${petName} is Level ${petLevelInfo.level}` : `Level ${petLevelInfo.level}`}
+                        </Text>
+                        <View style={{marginLeft: spacing.sm}}>
+                            <PetGrowthStrip currentLevel={petLevelInfo.level} compact/>
+                        </View>
+                    </View>
                     <View style={{flexDirection: 'row', alignItems: 'center', marginTop: spacing.xs}}>
                         <Flame size={14} color={colors.inactive}/>
                         <Text style={{
@@ -59,16 +64,6 @@ const Receipt = ({route, navigation}) => {
                             {streak}-week streak
                         </Text>
                     </View>
-                </View>
-
-                <View style={{
-                    paddingVertical: spacing.md,
-                    borderTopWidth: 1,
-                    borderBottomWidth: 1,
-                    borderColor: colors.border,
-                    marginBottom: spacing.md,
-                }}>
-                    <PetGrowthStrip currentLevel={petLevelInfo.level}/>
                 </View>
 
                 {loopResults.map((loop) => {

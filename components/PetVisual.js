@@ -29,8 +29,8 @@ const petImages = {
     },
 };
 
-export default function PetVisual({species, level, style}) {
-    const circleSize = circleSizes[level] || circleSizes[1];
+export default function PetVisual({species, level, style, size}) {
+    const circleSize = size || circleSizes[level] || circleSizes[1];
     const source = petImages[species]?.[level] || petImages.otter[1];
 
     return (

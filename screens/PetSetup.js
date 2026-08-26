@@ -7,6 +7,8 @@ import {petSpecies, presetPetNames} from '../data/mockPets';
 import {useWallet} from '../context/WalletContext';
 
 const speciesIcons = {otter: PawPrint, dog: Dog, cat: Cat};
+const speciesColors = {otter: '#D0342C', dog: '#2e7d32', cat: '#1565c0'};
+const speciesBgColors = {otter: '#fdeeee', dog: '#d5efdd', cat: '#e3f2fd'};
 
 const PetSetup = ({navigation}) => {
     const {setPet} = useWallet();
@@ -40,6 +42,8 @@ const PetSetup = ({navigation}) => {
                     {petSpecies.map((species) => {
                         const isSelected = species.id === selectedSpecies;
                         const SpeciesIcon = speciesIcons[species.id];
+                        const selectedColor = speciesColors[species.id];
+                        const selectedBg = speciesBgColors[species.id];
                         return (
                             <TouchableOpacity
                                 key={species.id}
@@ -50,15 +54,15 @@ const PetSetup = ({navigation}) => {
                                     paddingVertical: spacing.md,
                                     borderRadius: 12,
                                     borderWidth: isSelected ? 2 : 1,
-                                    borderColor: isSelected ? colors.primary : colors.border,
-                                    backgroundColor: isSelected ? '#fdeeee' : colors.background,
+                                    borderColor: isSelected ? selectedColor : colors.border,
+                                    backgroundColor: isSelected ? selectedBg : colors.background,
                                 }}
                             >
-                                <SpeciesIcon size={26} color={isSelected ? colors.primary : colors.inactive}/>
+                                <SpeciesIcon size={26} color={isSelected ? selectedColor : colors.inactive}/>
                                 <Text style={{
                                     fontFamily: fonts.medium,
                                     fontSize: fontSizes.small,
-                                    color: isSelected ? colors.primary : colors.inactive,
+                                    color: isSelected ? selectedColor : colors.inactive,
                                     marginTop: spacing.xs,
                                 }}>
                                     {species.label}

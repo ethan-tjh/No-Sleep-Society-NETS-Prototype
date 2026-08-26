@@ -2,12 +2,14 @@ import React, {useState} from 'react';
 import {Text, View, ScrollView, TouchableOpacity, TextInput} from 'react-native';
 import ScreenWrapper from '../components/ScreenWrapper';
 import {colors, fonts, fontSizes, spacing} from '../styles/theme';
-import {User, CreditCard, Bell, Shield, CircleHelp, LogOut, ChevronRight, Flame, Pencil, Dog, Cat, PawPrint} from 'lucide-react-native';
+import {User, CreditCard, Bell, Shield, CircleHelp, LogOut, ChevronRight, Pencil, Dog, Cat, PawPrint} from 'lucide-react-native';
 import {useWallet} from '../context/WalletContext';
 import PetVisual from '../components/PetVisual';
 import {petSpecies} from '../data/mockPets';
 
 const speciesIcons = {otter: PawPrint, dog: Dog, cat: Cat};
+const speciesColors = {otter: '#D0342C', dog: '#2e7d32', cat: '#1565c0'};
+const speciesBgColors = {otter: '#fdeeee', dog: '#d5efdd', cat: '#e3f2fd'};
 
 const ProfileMenuItem = ({icon: Icon, label, onPress}) => (
     <TouchableOpacity
@@ -39,7 +41,7 @@ const ProfileMenuItem = ({icon: Icon, label, onPress}) => (
 );
 
 const Profile = ({navigation}) => {
-    const {petName, petSpecies: currentSpecies, petLevelInfo, streak, qualifyingCount, transactions, setPet} = useWallet();
+    const {petName, petSpecies: currentSpecies, petLevelInfo, setPet} = useWallet();
     const [isEditingPet, setIsEditingPet] = useState(false);
     const [editName, setEditName] = useState(petName || '');
     const [editSpecies, setEditSpecies] = useState(currentSpecies || petSpecies[0].id);
@@ -61,10 +63,6 @@ const Profile = ({navigation}) => {
         setIsEditingPet(false);
     };
 
-    const totalSpent = transactions
-        .filter((t) => t.status === 'success')
-        .reduce((sum, t) => sum + t.amount, 0);
-
     return (
         <ScreenWrapper>
             <ScrollView contentContainerStyle={{padding: spacing.md, paddingTop: spacing.lg}}>
@@ -75,91 +73,25 @@ const Profile = ({navigation}) => {
                     textAlign: 'center',
                     marginBottom: spacing.lg,
                 }}>
-                    Profile
+                    Profile: Alex
                 </Text>
 
-                {/* Avatar and user info */}
+                {/* Avatar */}
                 <View style={{alignItems: 'center', marginBottom: spacing.lg}}>
                     <View style={{
-                        width: 80,
-                        height: 80,
-                        borderRadius: 40,
+                        width: 160,
+                        height: 160,
+                        borderRadius: 99,
                         backgroundColor: '#f5f5f5',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        marginBottom: spacing.sm,
+                        overflow: 'hidden',
                     }}>
                         {currentSpecies ? (
-                            <PetVisual species={currentSpecies} level={petLevelInfo.level}/>
+                            <PetVisual species={currentSpecies} level={petLevelInfo.level} size={120}/>
                         ) : (
                             <User size={36} color={colors.inactive}/>
                         )}
-                    </View>
-                    <Text style={{fontFamily: fonts.bold, fontSize: fontSizes.body + 2}}>
-                        Alex
-                    </Text>
-                    <Text style={{
-                        fontFamily: fonts.regular,
-                        fontSize: fontSizes.small,
-                        color: colors.inactive,
-                        marginTop: spacing.xs,
-                    }}>
-                        alex@example.com
-                    </Text>
-                </View>
-
-                {/* Stats summary */}
-                <View style={{
-                    flexDirection: 'row',
-                    borderRadius: 12,
-                    borderWidth: 1,
-                    borderColor: colors.border,
-                    padding: spacing.md,
-                    marginBottom: spacing.lg,
-                }}>
-                    <View style={{flex: 1, alignItems: 'center'}}>
-                        <Text style={{fontFamily: fonts.bold, fontSize: fontSizes.body}}>
-                            {qualifyingCount}
-                        </Text>
-                        <Text style={{
-                            fontFamily: fonts.regular,
-                            fontSize: fontSizes.small,
-                            color: colors.inactive,
-                            marginTop: spacing.xs,
-                        }}>
-                            Transactions
-                        </Text>
-                    </View>
-                    <View style={{width: 1, backgroundColor: colors.border}}/>
-                    <View style={{flex: 1, alignItems: 'center'}}>
-                        <Text style={{fontFamily: fonts.bold, fontSize: fontSizes.body}}>
-                            ${totalSpent.toFixed(2)}
-                        </Text>
-                        <Text style={{
-                            fontFamily: fonts.regular,
-                            fontSize: fontSizes.small,
-                            color: colors.inactive,
-                            marginTop: spacing.xs,
-                        }}>
-                            Total Spent
-                        </Text>
-                    </View>
-                    <View style={{width: 1, backgroundColor: colors.border}}/>
-                    <View style={{flex: 1, alignItems: 'center'}}>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <Flame size={14} color={colors.primary}/>
-                            <Text style={{fontFamily: fonts.bold, fontSize: fontSizes.body, marginLeft: 4}}>
-                                {streak}
-                            </Text>
-                        </View>
-                        <Text style={{
-                            fontFamily: fonts.regular,
-                            fontSize: fontSizes.small,
-                            color: colors.inactive,
-                            marginTop: spacing.xs,
-                        }}>
-                            Week Streak
-                        </Text>
                     </View>
                 </View>
 
@@ -218,6 +150,8 @@ const Profile = ({navigation}) => {
                             {petSpecies.map((species) => {
                                 const isSelected = species.id === editSpecies;
                                 const SpeciesIcon = speciesIcons[species.id];
+                                const selectedColor = speciesColors[species.id];
+                                const selectedBg = speciesBgColors[species.id];
                                 return (
                                     <TouchableOpacity
                                         key={species.id}
@@ -228,15 +162,15 @@ const Profile = ({navigation}) => {
                                             paddingVertical: spacing.sm,
                                             borderRadius: 12,
                                             borderWidth: isSelected ? 2 : 1,
-                                            borderColor: isSelected ? colors.primary : colors.border,
-                                            backgroundColor: isSelected ? '#fdeeee' : colors.background,
+                                            borderColor: isSelected ? selectedColor : colors.border,
+                                            backgroundColor: isSelected ? selectedBg : colors.background,
                                         }}
                                     >
-                                        <SpeciesIcon size={20} color={isSelected ? colors.primary : colors.inactive}/>
+                                        <SpeciesIcon size={20} color={isSelected ? selectedColor : colors.inactive}/>
                                         <Text style={{
                                             fontFamily: fonts.medium,
                                             fontSize: fontSizes.small,
-                                            color: isSelected ? colors.primary : colors.inactive,
+                                            color: isSelected ? selectedColor : colors.inactive,
                                             marginTop: spacing.xs,
                                         }}>
                                             {species.label}
