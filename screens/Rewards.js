@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text, View, ScrollView} from 'react-native';
 import ScreenWrapper from '../components/ScreenWrapper';
 import {colors, fonts, fontSizes, spacing} from '../styles/theme';
+import {Flame} from 'lucide-react-native';
 import {useWallet} from '../context/WalletContext';
+import PetVisual from '../components/PetVisual';
+import PetGrowthStrip from '../components/PetGrowthStrip';
+import {useNavigation} from '@react-navigation/native';
 
 const Dots = ({current, target}) => (
     <View style={{flexDirection: 'row', marginTop: spacing.xs}}>
@@ -22,11 +26,39 @@ const Dots = ({current, target}) => (
 );
 
 const Rewards = () => {
-    const {loopDefinitions, loopProgress} = useWallet();
+    const {loopDefinitions, loopProgress, petName, petSpecies, petLevelInfo, streak} = useWallet();
 
     return (
         <ScreenWrapper>
             <ScrollView contentContainerStyle={{padding: spacing.md, paddingTop: spacing.lg}}>
+                <View style={{alignItems: 'center', marginBottom: spacing.md}}>
+                    <PetVisual species={petSpecies} level={petLevelInfo.level}/>
+                    <Text style={{fontFamily: fonts.bold, fontSize: fontSizes.header, marginTop: spacing.sm}}>
+                        {petName ? `${petName} is level ${petLevelInfo.level}` : `Level ${petLevelInfo.level}`}
+                    </Text>
+                    <View style={{flexDirection: 'row', alignItems: 'center', marginTop: spacing.xs}}>
+                        <Flame size={14} color={colors.inactive}/>
+                        <Text style={{
+                            fontFamily: fonts.regular,
+                            fontSize: fontSizes.small,
+                            color: colors.inactive,
+                            marginLeft: 4,
+                        }}>
+                            {streak}-week streak
+                        </Text>
+                    </View>
+                </View>
+
+                <View style={{
+                    paddingVertical: spacing.md,
+                    borderTopWidth: 1,
+                    borderBottomWidth: 1,
+                    borderColor: colors.border,
+                    marginBottom: spacing.lg,
+                }}>
+                    <PetGrowthStrip currentLevel={petLevelInfo.level}/>
+                </View>
+
                 <Text style={{fontFamily: fonts.bold, fontSize: fontSizes.header, marginBottom: spacing.md}}>
                     Discover & Earn
                 </Text>

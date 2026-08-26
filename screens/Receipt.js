@@ -2,7 +2,10 @@ import React from 'react';
 import {Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import ScreenWrapper from '../components/ScreenWrapper';
 import {colors, fonts, fontSizes, spacing} from '../styles/theme';
-import {CheckCircle2} from 'lucide-react-native';
+import {CheckCircle2, Flame} from 'lucide-react-native';
+import {useWallet} from '../context/WalletContext';
+import PetVisual from '../components/PetVisual';
+import PetGrowthStrip from '../components/PetGrowthStrip';
 
 const Dots = ({current, target}) => (
     <View style={{flexDirection: 'row', marginTop: spacing.xs}}>
@@ -23,18 +26,49 @@ const Dots = ({current, target}) => (
 
 const Receipt = ({route, navigation}) => {
     const {payment, loopResults = []} = route.params || {};
+    const {petName, petSpecies, petLevelInfo, streak} = useWallet();
 
     return (
         <ScreenWrapper>
-            <ScrollView contentContainerStyle={{padding: spacing.md, paddingTop: spacing.xl}}>
+            <ScrollView contentContainerStyle={{padding: spacing.md, paddingTop: spacing.lg}}>
+                <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: spacing.lg}}>
+                    <CheckCircle2 size={20} color={colors.primary}/>
+                    <View style={{marginLeft: spacing.sm}}>
+                        <Text style={{fontFamily: fonts.medium, fontSize: fontSizes.body}}>
+                            Payment successful
+                        </Text>
+                        <Text style={{fontFamily: fonts.regular, fontSize: fontSizes.small, color: colors.inactive}}>
+                            ${payment?.amount?.toFixed(2)} — {payment?.merchantName}
+                        </Text>
+                    </View>
+                </View>
+
                 <View style={{alignItems: 'center', marginBottom: spacing.lg}}>
-                    <CheckCircle2 size={48} color={colors.primary}/>
+                    <PetVisual species={petSpecies} level={petLevelInfo.level}/>
                     <Text style={{fontFamily: fonts.bold, fontSize: fontSizes.header, marginTop: spacing.sm}}>
-                        Payment successful
+                        {petName ? `${petName} is level ${petLevelInfo.level}` : `Level ${petLevelInfo.level}`}
                     </Text>
-                    <Text style={{fontFamily: fonts.medium, fontSize: fontSizes.body, color: colors.inactive, marginTop: spacing.xs}}>
-                        ${payment?.amount?.toFixed(2)} — {payment?.merchantName}
-                    </Text>
+                    <View style={{flexDirection: 'row', alignItems: 'center', marginTop: spacing.xs}}>
+                        <Flame size={14} color={colors.inactive}/>
+                        <Text style={{
+                            fontFamily: fonts.regular,
+                            fontSize: fontSizes.small,
+                            color: colors.inactive,
+                            marginLeft: 4,
+                        }}>
+                            {streak}-week streak
+                        </Text>
+                    </View>
+                </View>
+
+                <View style={{
+                    paddingVertical: spacing.md,
+                    borderTopWidth: 1,
+                    borderBottomWidth: 1,
+                    borderColor: colors.border,
+                    marginBottom: spacing.md,
+                }}>
+                    <PetGrowthStrip currentLevel={petLevelInfo.level}/>
                 </View>
 
                 {loopResults.map((loop) => {
@@ -55,7 +89,12 @@ const Receipt = ({route, navigation}) => {
                                 {loop.name}
                             </Text>
                             <Dots current={loop.current} target={loop.target}/>
-                            <Text style={{fontFamily: fonts.regular, fontSize: fontSizes.small, color: colors.inactive, marginTop: spacing.xs}}>
+                            <Text style={{
+                                fontFamily: fonts.regular,
+                                fontSize: fontSizes.small,
+                                color: colors.inactive,
+                                marginTop: spacing.xs,
+                            }}>
                                 {loop.justCompleted
                                     ? `Reward unlocked: ${loop.reward}`
                                     : `${remaining} more NETS payment${remaining === 1 ? '' : 's'} to unlock your reward`}
@@ -65,7 +104,12 @@ const Receipt = ({route, navigation}) => {
                 })}
 
                 {loopResults.length === 0 && (
-                    <Text style={{fontFamily: fonts.regular, fontSize: fontSizes.small, color: colors.inactive, marginBottom: spacing.md}}>
+                    <Text style={{
+                        fontFamily: fonts.regular,
+                        fontSize: fontSizes.small,
+                        color: colors.inactive,
+                        marginBottom: spacing.md,
+                    }}>
                         This merchant isn't part of a loop yet.
                     </Text>
                 )}
