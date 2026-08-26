@@ -1,21 +1,37 @@
 import React from 'react';
-import {View} from 'react-native';
-import {Dog, Cat, PawPrint} from 'lucide-react-native';
-import {colors} from '../styles/theme';
+import {Image, View} from 'react-native';
 
-// SWAP POINT: once the team's real illustrations (5 sizes x species) exist,
-// replace the placeholder icon below with:
-//   <Image source={petImages[species][level]} style={{width: circleSize, height: circleSize}} resizeMode="contain" />
-// Nothing calling <PetVisual /> needs to change.
-
-const speciesIcons = {otter: PawPrint, dog: Dog, cat: Cat};
 const circleSizes = {1: 72, 2: 92, 3: 112, 4: 132, 5: 152};
-const ICON_RATIO = 0.5;
+
+// Every require() must be a static, literal path — a React Native bundler
+// constraint, not a style choice. Add a line here if a new species is added.
+const petImages = {
+    otter: {
+        1: require('../assets/pets/otter/otter_level_1.png'),
+        2: require('../assets/pets/otter/otter_level_2.png'),
+        3: require('../assets/pets/otter/otter_level_3.png'),
+        4: require('../assets/pets/otter/otter_level_4.png'),
+        5: require('../assets/pets/otter/otter_level_5.png'),
+    },
+    dog: {
+        1: require('../assets/pets/dog/dog_level_1.png'),
+        2: require('../assets/pets/dog/dog_level_2.png'),
+        3: require('../assets/pets/dog/dog_level_3.png'),
+        4: require('../assets/pets/dog/dog_level_4.png'),
+        5: require('../assets/pets/dog/dog_level_5.png'),
+    },
+    cat: {
+        1: require('../assets/pets/cat/cat_level_1.png'),
+        2: require('../assets/pets/cat/cat_level_2.png'),
+        3: require('../assets/pets/cat/cat_level_3.png'),
+        4: require('../assets/pets/cat/cat_level_4.png'),
+        5: require('../assets/pets/cat/cat_level_5.png'),
+    },
+};
 
 export default function PetVisual({species, level, style}) {
-    const SpeciesIcon = speciesIcons[species] || PawPrint;
     const circleSize = circleSizes[level] || circleSizes[1];
-    const iconSize = Math.round(circleSize * ICON_RATIO);
+    const source = petImages[species]?.[level] || petImages.otter[1];
 
     return (
         <View
@@ -23,15 +39,17 @@ export default function PetVisual({species, level, style}) {
                 {
                     width: circleSize,
                     height: circleSize,
-                    borderRadius: circleSize / 2,
-                    backgroundColor: '#fdeeee',
                     alignItems: 'center',
                     justifyContent: 'center',
                 },
                 style,
             ]}
         >
-            <SpeciesIcon size={iconSize} color={colors.primary}/>
+            <Image
+                source={source}
+                style={{width: circleSize, height: circleSize}}
+                resizeMode="contain"
+            />
         </View>
     );
 }

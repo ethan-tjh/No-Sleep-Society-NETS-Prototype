@@ -27,6 +27,17 @@ const Dots = ({current, target}) => (
 
 const Rewards = () => {
     const {loopDefinitions, loopProgress, petName, petSpecies, petLevelInfo, streak} = useWallet();
+    const navigation = useNavigation();
+
+    useEffect(() => {
+        if (!petName) {
+            navigation.navigate('PetSetup');
+        }
+    }, [petName, navigation]);
+
+    if (!petName) {
+        return <ScreenWrapper />;
+    }
 
     return (
         <ScreenWrapper>

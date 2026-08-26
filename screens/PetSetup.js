@@ -26,7 +26,7 @@ const PetSetup = ({navigation}) => {
             return;
         }
         setPet({name: trimmed, species: selectedSpecies});
-        navigation.reset({index: 0, routes: [{name: 'MainTabs'}]});
+        navigation.goBack();
     };
 
     return (
