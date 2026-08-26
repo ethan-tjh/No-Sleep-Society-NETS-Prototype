@@ -48,11 +48,13 @@ export default function Navbar({state, descriptors, navigation}) {
                             NavbarStyle.iconWrapper,
                             isScanTab && NavbarStyle.iconWrapperActive,
                         ]}>
-                            <Icon name={icons[route.name]} color={iconColor}/>
+                            <Icon name={icons[route.name]} color={iconColor} size={isScanTab ? 20 : 24}/>
                             <Text style={[
                                 NavbarStyle.label,
-                                isScanTab ? {color: '#fff', fontWeight: '600'} : (isFocused && NavbarStyle.labelFocusedPlain),
-                            ]}>
+                                isScanTab ? {color: '#fff', fontWeight: '600', fontSize: 10} : (isFocused && NavbarStyle.labelFocusedPlain),
+                            ]}
+                                numberOfLines={1}
+                            >
                                 {label}
                             </Text>
                         </View>

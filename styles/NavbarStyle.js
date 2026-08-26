@@ -28,7 +28,12 @@ const NavbarStyle = StyleSheet.create({
         overflow: 'hidden',
     },
     iconWrapperActive: {
-      backgroundColor: colors.primary,
+        backgroundColor: colors.primary,
+        width: 56,
+        height: 56,
+        paddingVertical: 0,
+        paddingHorizontal: 0,
+        gap: 2,
     },
     label: {
         fontSize: fontSizes.small,
