@@ -96,7 +96,7 @@ const Pay = ({navigation}) => {
                         }}
                     >
                         <Text style={{fontFamily: fonts.bold, fontSize: fontSizes.body, color: '#fff'}}>
-                            Pay $6.50 with NETS QR
+                            Pay $6.50 with NETS
                         </Text>
                     </TouchableOpacity>
                 </View>
