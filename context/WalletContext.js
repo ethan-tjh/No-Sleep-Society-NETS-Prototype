@@ -1,17 +1,24 @@
 import React, {createContext, useContext, useReducer} from 'react';
 import {evaluatePayment} from '../engine/loopEngine';
 import {computeStreak, getPetLevel} from '../engine/petEngine';
+import {computeBudgetSummary} from '../engine/budgetEngine';
 import {loopDefinitions} from '../data/mockLoops';
 import {petLevelThresholds} from '../data/mockPetLevels';
+import {monthlyBudget, buildSeedSpending} from '../data/mockBudget';
 
 const WalletContext = createContext(null);
 
-const initialState = {
-    transactions: [],
-    loopProgress: {},
-    petName: null,
-    petSpecies: null,
-};
+// Lazy init so buildSeedSpending()'s relative dates are computed at actual
+// app launch, not at bundle-build time.
+function createInitialState() {
+    return {
+        transactions: [], // drives loop progress + pet level/streak — only grows via recordPayment()
+        historicalSpending: buildSeedSpending(), // Home budget stats only — never touches loop/pet logic
+        loopProgress: {},
+        petName: null,
+        petSpecies: null,
+    };
+}
 
 function walletReducer(state, action) {
     switch (action.type) {
@@ -33,7 +40,7 @@ function walletReducer(state, action) {
 }
 
 export function WalletProvider({children}) {
-    const [state, dispatch] = useReducer(walletReducer, initialState);
+    const [state, dispatch] = useReducer(walletReducer, undefined, createInitialState);
 
     // recordPayment is the single entry point for "payment succeeded" —
     // called the same way whether triggered from Pay.js or Scan.js, so
@@ -55,6 +62,12 @@ export function WalletProvider({children}) {
     const petLevelInfo = getPetLevel(qualifyingCount, petLevelThresholds);
     const streak = computeStreak(state.transactions);
 
+    // Budget stats use seed + live transactions together, so Home reflects
+    // both realistic history AND every payment made during the demo — but
+    // loop/pet logic above only ever reads state.transactions (live only).
+    const allSpending = [...state.historicalSpending, ...state.transactions];
+    const budgetSummary = computeBudgetSummary(allSpending, monthlyBudget);
+
     const value = {
         transactions: state.transactions,
         loopProgress: state.loopProgress,
@@ -66,6 +79,7 @@ export function WalletProvider({children}) {
         petLevelInfo,
         streak,
         qualifyingCount,
+        budgetSummary,
     };
 
     return (
